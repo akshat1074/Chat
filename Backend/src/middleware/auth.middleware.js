@@ -19,11 +19,16 @@ export const protectRoute = async(req,res,next)=>{
       const user = await User.findById(decoded.user.Id).select("-password");
       
     if(!user){
-        
+        return res.status(404).json({message:"User not found"})
     }     
  
+     req.user =user;
+
+     next()
+
 
     } catch (error) {
-        
+         console.log("error in protectRoute middlware",error.message)
+         res.status(500).json({message:"Internal server error"})
     }
 }

@@ -6,10 +6,14 @@ import SignUpPage from './pages/SignUpPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingPage from './pages/SettingsPage';
 import { useAuthStore } from './store/useAuthStore';
+import { Loader } from 'lucide-react';
+import Navbar from './components/Navbar';
 
 const App = () => {
     
     const {authUser,checkAuth,isCheckingAuth}=useAuthStore();
+    
+
 
     useEffect(()=>{
       checkAuth();
@@ -24,7 +28,7 @@ const App = () => {
     )
     
   return (
-    <div>
+    <div data-theme={theme}>
       <Navbar/>
      
       <Routes>
