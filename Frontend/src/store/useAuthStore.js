@@ -7,6 +7,8 @@ export const useAuthStore = create((set)=>({
     isLoggingIn:false,
     isUpdatingProfile:false,
     isCheckingAuth:true,
+    onlineUsers:[],
+    socket:null,
 
     checkAuth:async()=>{
         try { 
@@ -19,6 +21,16 @@ export const useAuthStore = create((set)=>({
             set({authUser:null});
         } finally{
             set({isCheckingAuth:false});
+        }
+    },
+
+    signup:async(data)=>{
+        setInterval({isSigningUp:true});
+        try{
+            const res = await axiosInstance.post("/auth/signup",data);
+            set({authUser:res.data})
+        }catch{
+            
         }
     }
       

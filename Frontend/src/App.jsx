@@ -8,6 +8,7 @@ import SettingPage from './pages/SettingsPage';
 import { useAuthStore } from './store/useAuthStore';
 import { Loader } from 'lucide-react';
 import Navbar from './components/Navbar';
+import { Navigate } from 'react-router-dom';
 
 const App = () => {
     
@@ -32,11 +33,11 @@ const App = () => {
       <Navbar/>
      
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/signup" element={<SignUpPage/>}/>
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/settings" element={<SettingPage/>}/>
-        <Route path="/profile" element={<ProfilePage/>}/>
+      <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
+        <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+        <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
+        <Route path="/settings" element={<SettingPage />} />
+        <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
 
       </Routes>
      
